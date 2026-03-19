@@ -23,23 +23,32 @@ namespace EchoMessenger
         }
 
         private void btnSend_Click(object sender, EventArgs e)
-        {
-
-            //빈 문자열이나 공백만 있을 경우 전송을 차단한다.
+        {// 1. 빈 칸 전송 차단
             if (string.IsNullOrWhiteSpace(txtInput.Text)) return;
-            
-            //입력창(txtInput)에 타이핑한 내용을 변수에 저장
-            string typed_msg = txtInput.Text;
 
-            //리스트박스(lstChat)의 Items 주머니에 추가
-            lstChat.Items.Add(typed_msg);
+            // 2. [핵심] 기존에 리스트 마지막에 있던 "현재 대화" 줄을 찾아서 지운다.
+            if (lstChat.Items.Count > 0)
+            {
+                string lastItem = lstChat.Items[lstChat.Items.Count - 1].ToString();
+                if (lastItem.StartsWith("▶ 현재 대화:"))
+                {
+                    lstChat.Items.RemoveAt(lstChat.Items.Count - 1);
+                }
+            }
 
-            //다음 입력을 위해 입력창을 비움
+            // 3. 메시지 가공 (공백 제거 + 시간 추가)
+            string typed_msg = txtInput.Text.Trim();
+            string time_stamp_msg = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} {typed_msg}";
+
+            // 4. 새 메시지 추가
+            lstChat.Items.Add(time_stamp_msg);
+
+            // 5. [핵심] 메시지 바로 밑에 새로운 개수 표시 줄을 추가한다.
+            lstChat.Items.Add($"▶ 현재 대화: {lstChat.Items.Count}개");
+
+            // 6. 입력창 초기화 및 커서 이동
             txtInput.Clear();
-
-            //다음 입력을 위해 입력창(txtInput)으로 커서를 자동 이동시킨다.
             txtInput.Focus();
-
         }
 
         private void txtInput_KeyDown(object sender, KeyEventArgs e)
@@ -49,6 +58,11 @@ namespace EchoMessenger
             {
                 btnSend.PerformClick();
             }
+        }
+
+        private void lstChat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
