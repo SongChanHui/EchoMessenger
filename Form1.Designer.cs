@@ -28,12 +28,73 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            lblTitle = new Label();
+            txtInput = new TextBox();
+            btnSend = new Button();
+            lstChat = new ListBox();
+            SuspendLayout();
+            // 
+            // lblTitle
+            // 
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("한컴 고딕", 35.9999962F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTitle.ForeColor = SystemColors.Highlight;
+            lblTitle.Location = new Point(12, 9);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(783, 125);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "Echo Messenger";
+            lblTitle.Click += label1_Click;
+            // 
+            // txtInput
+            // 
+            txtInput.Location = new Point(12, 638);
+            txtInput.Name = "txtInput";
+            txtInput.Size = new Size(1101, 39);
+            txtInput.TabIndex = 1;
+            txtInput.TextChanged += textBox1_TextChanged;
+            // 
+            // btnSend
+            // 
+            btnSend.BackColor = SystemColors.GradientActiveCaption;
+            btnSend.Location = new Point(1119, 635);
+            btnSend.Name = "btnSend";
+            btnSend.Size = new Size(209, 42);
+            btnSend.TabIndex = 2;
+            btnSend.Text = "전송";
+            btnSend.UseVisualStyleBackColor = false;
+            btnSend.Click += btnSend_Click;
+            // 
+            // lstChat
+            // 
+            lstChat.FormattingEnabled = true;
+            lstChat.Location = new Point(12, 155);
+            lstChat.Name = "lstChat";
+            lstChat.Size = new Size(1316, 420);
+            lstChat.TabIndex = 3;
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(14F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = SystemColors.Menu;
+            ClientSize = new Size(1340, 733);
+            Controls.Add(lstChat);
+            Controls.Add(btnSend);
+            Controls.Add(txtInput);
+            Controls.Add(lblTitle);
+            Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Label lblTitle;
+        private TextBox txtInput;
+        private Button btnSend;
+        private ListBox lstChat;
     }
 }
