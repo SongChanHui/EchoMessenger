@@ -53,6 +53,7 @@
             txtInput.Size = new Size(1101, 39);
             txtInput.TabIndex = 1;
             txtInput.TextChanged += textBox1_TextChanged;
+            txtInput.KeyDown += txtInput_KeyDown;
             // 
             // btnSend
             // 
